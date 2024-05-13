@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-7">
+      <div class="card p-3 py-4">
+        <%= button_to(name = "Edit", "/users/edit", method: :get, class: "btn btn-outline-success px-4")  %>
+        <div class="text-center"><%= cl_image_tag(current_user.profile_picture.key, class:"rounded-circle col-sm-4") if current_user.profile_picture.attached? %> </div>
+        <div class="text-center mt-3"> <span class="bg-secondary p-1 px-4 rounded text-white">Pro</span>
+          <h5 class="mt-2 mb-0"><%= current_user.first_name+" "+current_user.last_name  %></h5>
+          <span><%= current_user.role %></span>
+          <div class="px-4 mt-1">
+            <p class="fonts">
+              <%= current_user.email %>
+            </p>
+            <% if !current_user.admin? %>
+              <p class="fonts"><strong >Your Constituency</strong>
+                <%= current_user.constituency.name %>
+              <% end %>
+            </div>
+            <% if !current_user.cnic.blank? %>
+              <p class="fonts"><strong >Your CNIC</strong>
+                <%= current_user.cnic %>
+                <br>
+              <% end %>
+              <% if current_user.voter?  && @vote_status == false  %>
+                <% if current_user.candidate_profile %>
+                  <% if current_user.candidate_profile.pending? %>
+                    <strong>Your Application for Candidateship is pending</strong>
+                  <% end %>
+                <% else %>
+                  <%= button_to(name = "Apply for Candidateship", new_candidate_profile_path, method: :get, class: "btn btn-outline-primary px-4")  %>
+                <% end %>
+              <% end %>
+              <% if current_user.candidate? && !@election_status_candidate %>
+                <%= button_to(name = "Remove Candidateship", candidate_profile_path(current_user.candidate_profile),data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-outline-primary px-4")  %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

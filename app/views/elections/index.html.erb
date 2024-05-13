@@ -1,0 +1,36 @@
+<h1 class="h2 mb-3 fw-normal text-center mt-4">Elections</h1>
+<div class="p-5">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">End Date</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @elections.all.each do |c| %>
+        <tr>
+          <td>
+            <%= c.id %>
+          </td>
+          <td>
+            <%= c.end_date.strftime("%B %d, %Y, %A %H:%M") %>
+          </td>
+          <td>
+            <%= c.duration %> Days
+          </td>
+          <td>
+            <%= c.status %>
+          </td>
+          <td>
+            <% if c.status == "completed" %>
+              <%= link_to "Show", election_path(id: c.id),method: :get %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

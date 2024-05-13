@@ -1,0 +1,25 @@
+<div class="d-flex justify-content-center">
+  <% if @election.errors.any? %>
+    <div id="error_explanation" >
+      <h2><%= pluralize(@election.errors.count, "error") %> prohibited this article from being saved:</h2>
+      <ul>
+        <% @election.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>
+<div class= "form-signin d-flex justify-content-center mt-4">
+  <%= form_for(@election,url: elections_path) do |f| %>
+    <h1 class="h3 mb-3 fw-normal">Start Election</h1>
+    <div class="form-input">
+      <label for="floatingInput">Duration Days</label>
+      <%= f.select(:duration,options_for_select(
+        [
+          [1],[2],[3],[4],[5]
+        ], 1))%>
+    </div>
+    <%= f.submit "Start",class: "w-100 btn btn-lg btn-primary" %>
+  <% end %>
+</div>

@@ -1,0 +1,23 @@
+<div class="d-flex justify-content-center">
+  <% if @candidate.errors.any? %>
+    <div id="error_explanation" >
+      <h2><%= pluralize(@candidate.errors.count, "error") %> prohibited this article from being saved:</h2>
+      <ul>
+        <% @candidate.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>
+<div class= "form-signin d-flex justify-content-center">
+  <%= form_for(@candidate, url: candidate_profiles_path) do |f| %>
+    <h1 class="h2 mb-3 fw-normal">Candidate Application</h1>
+    <div class="form-input">
+      <label for="floatingInput">Enter Party Name</label>
+      <%= f.text_field :party, autofocus: true, class: "form-control" %>
+    </div>
+    <%= f.file_field :symbol_image, direct_upload: true, class: "form-control"%>
+    <%= f.submit "Apply",class: "w-100 btn btn-lg btn-primary" %>
+  <% end %>
+</div>

@@ -1,0 +1,31 @@
+<h1 class="h2 mb-3 fw-normal text-center mt-4">Approved Candidateships</h1>
+<div class="p-5">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Party</th>
+        <th scope="col">Constituency</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @approved.each do |c| %>
+        <tr>
+          <td>
+            <%= c.first_name+" "+c.last_name %>
+          </td>
+          <td>
+            <%= c.email %>
+          </td>
+          <td>
+            <%= c.candidate_profile.party %>
+          </td>
+          <td>
+            <%= c.constituency.name %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

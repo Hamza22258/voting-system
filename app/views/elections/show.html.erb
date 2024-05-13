@@ -1,0 +1,31 @@
+<% if @election.completed? %>
+  <h1 class="h2 mb-3 fw-normal text-center mt-2">Dashboard Statistics</h1>
+  <div class="input-group mb-3 w-25 m-1">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">Search</span>
+    </div>
+    <%= form_tag("/search_election/#{@election.id}",method: :get, class: "d-flex") do %>
+      <%= text_field_tag(:search, params[:search], class: "form-control")  %>
+      <%= submit_tag("Go", class: "btn btn-success px-2") %>
+    <% end %>
+  </div>
+  <% if @won_candidates != [] %>
+    <%= paginate @won_candidates %>
+    <div class="d-flex justify-content-around mt-2">
+      <% @won_candidates.each do |c| %>
+        <div class="card" style="width:300px;height:280px">
+          <%= cl_image_tag(c.candidate_profile.symbol_image.key,:class => "col-md-4 h-100 px-0 card-img-top") if c.candidate_profile.symbol_image.attached? %>
+          <div class="card-body">
+            <h4 class="card-title"> <%= c.first_name+" "+c.last_name %></h4>
+            <p class="card-text"> <%= c.candidate_profile.party %></p>
+            <p class="card-text"> <%= c.constituency.name %></p>
+            <p class="card-text"> Won</p>
+            <a  class="btn btn-primary">Total Votes <%= @votes[c.id] %></a>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <h1 class="h2 mb-3 fw-normal text-center mt-2">Election Pending</h1>
+<% end %>

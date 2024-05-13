@@ -1,0 +1,12 @@
+<% if @election_status == true %>
+  <% if @vote_status == true %>
+    <button type="button" class="btn btn-primary">Election End Time: <%= @election.end_date.strftime("%B %d, %Y, %A %H:%M")  %></button>
+    <h1 class="h2 mb-3 fw-normal text-center mt-4">Vote Casted</h1>
+    <p class="mb-3 fw-normal text-center">Voted to: <%= @voted_to.candidate.first_name + " " + @voted_to.candidate.last_name %></p>
+  <% else %>
+    <button type="button" class="btn btn-primary">Election End Time: <%= @election.end_date.strftime("%B %d, %Y, %A %H:%M")  %></button>
+    <%= render 'vote' %>
+  <% end %>
+<% else %>
+  <%= render 'dashboard' %>
+<% end %>

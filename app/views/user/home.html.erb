@@ -1,0 +1,46 @@
+<% if @votes_status %>
+  <h1 class="h2 mb-3 fw-normal text-center mt-4">Your Votes</h1>
+  <div class="p-5">
+    <table class="table">
+      <%= paginate @votes %>
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Constituency</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @votes.each do |c| %>
+          <tr>
+            <td>
+              <%= c.user.first_name+" "+c.user.last_name %>
+            </td>
+            <td>
+              <%= c.user.email %>
+            </td>
+            <td>
+              <%= c.user.constituency.name %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <h2 class="h4 mb-3 fw-normal text-center mt-4"">Your Votes = <%= @total_votes  %></h2>
+    <% if @win_status > 0%>
+      <div class="container">
+        <div class="row">
+          <div class="col text-center">
+            <button type="button" class="btn btn-success ">You won</button>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <% if @count_status %>
+    <h1 class="h3 mb-3 fw-normal text-center mt-4">Election in Process</h1>
+  <% else %>
+    <h1 class="h3 mb-3 fw-normal text-center mt-4">Election Period Not Active</h1>
+  <% end %>
+<% end %>

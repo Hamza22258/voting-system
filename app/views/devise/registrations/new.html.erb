@@ -1,0 +1,38 @@
+<div class= "form-signin d-flex justify-content-center mt-4">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <h1 class="h3 mb-3 fw-normal">Registration</h1>
+    <div class="form-floating">
+      <%= f.text_field :first_name, autofocus: true, class: "form-control",required: true  %>
+      <label for="floatingInput">First Name</label>
+    </div>
+    <div class="form-floating">
+      <%= f.text_field :last_name, autofocus: true, class: "form-control",required: true %>
+      <label for="floatingInput">Last name</label>
+    </div>
+    <div class="form-floating">
+      <%= f.email_field :email, autofocus: true, class: "form-control",required: true  %>
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating">
+      <%= f.text_field :cnic, autofocus: true, class: "form-control",required: true  %>
+      <label for="floatingInput">CNIC</label>
+    </div>
+    <div class="form-floating">
+      <%= f.password_field :password, autocomplete: "new-password" , class: "form-control",required: true %>
+      <label for="floatingPassword">New Password</label>
+      <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+    </div>
+    <div class="form-floating">
+      <%= f.password_field :password_confirmation, autocomplete: "new-password"  , class: "form-control",required: true %>
+      <label for="floatingPassword">New Password</label>
+    </div>
+    <%= f.file_field :profile_picture,class: "form-control", direct_upload: true %>
+    <label for="floatingInput">Select Constituency</label>
+    <%= f.collection_select(:constituency_id, Constituency.all, :id, :name,{},class: "form-select") %>
+    <%= f.submit "Sign up",class: "w-100 btn btn-lg btn-primary" %>
+    <%= render "devise/shared/links" %>
+  <% end %>
+</div>

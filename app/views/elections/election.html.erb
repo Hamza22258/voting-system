@@ -1,0 +1,44 @@
+<% if @election_status == false %>
+  <%= render 'form' %>
+<% end %>
+<h1 class="h2 mb-3 fw-normal text-center mt-4">Elections</h1>
+<div class="p-5">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_user.elections.all.each do |c| %>
+        <tr>
+          <td>
+            <%= c.id %>
+          </td>
+          <td>
+            <%= c.start_date.strftime("%B %d, %Y, %A %H:%M") %>
+          </td>
+          <td>
+            <%= c.duration %> Days
+          </td>
+          <td>
+            <%= c.status %>
+          </td>
+          <% if c.status == "pending" %>
+            <td>
+              <%= button_to "count", election_path(id: c.id,route_to:"count" ), method: :patch , class: "nav-link button-link" %>
+            </td>
+          <% end %>
+          <% if c.status == "counting" %>
+            <td>
+              <%= button_to "stop", election_path(id: c.id,route_to:"stop"), method: :patch , class: "nav-link button-link" %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

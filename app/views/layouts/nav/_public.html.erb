@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark" aria-label="Third navbar example">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Voting System</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarsExample03">
+      <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+        <% if user_signed_in? %>
+          <li class="nav-item">
+            <% if current_user.voter? %>
+              <%= link_to "Home", new_vote_path, class: "nav-link" %>
+            <% elsif current_user.admin? %>
+              <%= link_to "Home", candidate_profiles_path, class: "nav-link" %>
+            <% elsif current_user.candidate? %>
+              <%= link_to "Home", home_path, class: "nav-link" %>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <% if current_user.admin? %>
+              <%= link_to "Approved", approved_path, class: "nav-link" %>
+            <% end %>
+          </li>
+          <% if current_user.candidate? %>
+            <li class="nav-item">
+              <%= link_to "Voters", candidate_profiles_path, class: "nav-link" %>
+            </li>
+          <% end %>
+          <% if current_user.voter? %>
+            <li class="nav-item">
+              <%= link_to "Elections", elections_path, class: "nav-link" %>
+            </li>
+          <% end %>
+          <% if current_user.admin? %>
+            <li class="nav-item">
+              <%= link_to "Election", new_election_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Statistics", elections_path, class: "nav-link" %>
+            </li>
+          <% end %>
+          <li class="nav-item">
+            <%= button_to "Log out", destroy_user_session_path,method: :delete, class: "nav-link button-link" %>
+          </li>
+          <li class="nav-item">
+            <% if current_user.voter? %>
+              <%= link_to "Profile", profile_path, class: "nav-link" %>
+            <% elsif current_user.admin? %>
+              <%= link_to "Profile", profile_path, class: "nav-link" %>
+            <% elsif current_user.candidate? %>
+              <%= link_to "Profile", profile_path, class: "nav-link" %>
+            <% end %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Log in", new_user_session_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  voter_id: one
+  constituency_id: one
+  candidate_id: one
+  election_id: one
+  cast_time: 2022-04-25 21:35:45
+
+two:
+  voter_id: two
+  constituency_id: two
+  candidate_id: two
+  election_id: two
+  cast_time: 2022-04-25 21:35:45

@@ -1,0 +1,35 @@
+<h1 class="h2 mb-3 fw-normal text-center mt-4">Detailed Votes</h1>
+<div class="p-5">
+  <table class="table">
+    <%= paginate @candidates %>
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Constituency</th>
+        <th scope="col">Votes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @candidates.each do |c| %>
+        <tr>
+          <td>
+            <%= c.first_name+" "+c.last_name %>
+          </td>
+          <td>
+            <%= c.email %>
+          </td>
+          <td>
+            <%= c.constituency.name %>
+          </td>
+          <td>
+            <% if @votes[c.id] %>
+              <%= @votes[c.id] %></td>
+          <% else %>
+            0
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

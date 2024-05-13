@@ -1,0 +1,31 @@
+<h1 class="h2 mb-3 fw-normal text-center mt-4">Pending Candidateships</h1>
+<div class="p-5">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Party</th>
+        <th scope="col">Approve</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @candidates.each do |c| %>
+        <tr>
+          <td>
+            <%= c.first_name+" "+c.last_name %>
+          </td>
+          <td>
+            <%= c.email %>
+          </td>
+          <td>
+            <%= c.candidate_profile.party %>
+          </td>
+          <td>
+            <%= button_to "approve", candidate_profile_path(id: c.id), method: :patch , class: "nav-link button-link"%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

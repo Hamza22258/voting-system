@@ -1,0 +1,35 @@
+<% if !@candidates.empty? %>
+  <h1 class="h3 mb-3 fw-normal text-center mt-4">Cast Vote</h1>
+  <div class="p-5">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Candidate Name</th>
+          <th scope="col">Symbol Image</th>
+          <th scope="col">Party</th>
+          <th scope="col">Vote</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @candidates.each do |c| %>
+          <tr>
+            <td>
+              <%= c.first_name+" "+c.last_name %>
+            </td>
+            <td>
+              <%= cl_image_tag(c.candidate_profile.symbol_image.key,:class => "col-md-4 px-0") if c.candidate_profile.symbol_image.attached? %>
+            </td>
+            <td>
+              <%= c.candidate_profile.party %>
+            </td>
+            <td>
+              <%= button_to "vote", votes_path(id: c.id), method: :post, class: "nav-link button-link" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <h1 class="h3 mb-3 fw-normal text-center mt-4">No Candidates in your constituency</h1>
+<% end %>
